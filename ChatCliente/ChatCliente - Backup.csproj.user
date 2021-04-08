@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MainEntryPoint>MyNamespace.Program
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="ChatServidor\frmServidor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
+</MainEntryPoint>
