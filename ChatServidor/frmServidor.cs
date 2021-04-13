@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.Net.Sockets;
 
 namespace ChatServidor
 {
@@ -16,6 +17,15 @@ namespace ChatServidor
         public frmServidor()
         {
             InitializeComponent();
+
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    txtIP.Text = ip.ToString();
+                }
+            }
         }
 
         private delegate void AtualizaStatusCallback(string strMensagem);

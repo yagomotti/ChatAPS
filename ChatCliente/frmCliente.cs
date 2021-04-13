@@ -21,7 +21,17 @@ namespace ChatCliente
             // Na saida da aplicação : desconectar
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
             InitializeComponent();
+
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    txtServidorIP.Text = ip.ToString();
+                }
+            }
         }
+
 
         // Trata o nome do usuário
         private string NomeUsuario = "Desconhecido";
