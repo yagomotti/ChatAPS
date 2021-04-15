@@ -124,6 +124,18 @@ namespace ChatCliente
             }
             txtMensagem.Text = "";
         }
+        private void EnviaImagem(string filePath)
+        {
+            if (filePath.Length >= 1)
+            {
+                Image imagem = Image.FromFile(filePath);
+                Bitmap bitmp = new Bitmap(imagem);
+                stwEnviador.WriteLine(bitmp);
+                stwEnviador.Flush();
+                txtMensagem.Lines = null;
+            }
+            txtMensagem.Text = "";
+        }
 
         // Fecha a conexão com o servidor
         private void FechaConexao(string Motivo)
@@ -179,6 +191,34 @@ namespace ChatCliente
             if (e.KeyChar == (char)13)
             {
                 EnviaMensagem();
+            }
+        }
+
+        private void frmCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAnexaImagem_Click(object sender, EventArgs e)
+        {
+            var filePath = string.Empty;
+            var fileContent = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "Image Files (*.png)|*.png|All Files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = openFileDialog.FileName;
+
+                    var fileStream = openFileDialog.OpenFile();
+                }
+
+                EnviaImagem(filePath);
             }
         }
     }

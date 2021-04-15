@@ -35,10 +35,11 @@ namespace ChatCliente
             this.txtServidorIP = new System.Windows.Forms.TextBox();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.btnConectar = new System.Windows.Forms.Button();
-            this.txtLog = new System.Windows.Forms.TextBox();
             this.txtMensagem = new System.Windows.Forms.TextBox();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnAnexaImagem = new System.Windows.Forms.Button();
+            this.txtLog = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -83,22 +84,12 @@ namespace ChatCliente
             this.btnConectar.UseVisualStyleBackColor = true;
             this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
             // 
-            // txtLog
-            // 
-            this.txtLog.Location = new System.Drawing.Point(34, 98);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.ReadOnly = true;
-            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(506, 361);
-            this.txtLog.TabIndex = 5;
-            // 
             // txtMensagem
             // 
             this.txtMensagem.Location = new System.Drawing.Point(34, 477);
             this.txtMensagem.Multiline = true;
             this.txtMensagem.Name = "txtMensagem";
-            this.txtMensagem.Size = new System.Drawing.Size(425, 48);
+            this.txtMensagem.Size = new System.Drawing.Size(301, 48);
             this.txtMensagem.TabIndex = 6;
             this.txtMensagem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMensagem_KeyPress);
             // 
@@ -124,16 +115,37 @@ namespace ChatCliente
             this.label3.Text = "_________________________________________________________________________________" +
     "______________________________________";
             // 
+            // btnAnexaImagem
+            // 
+            this.btnAnexaImagem.BackColor = System.Drawing.Color.Azure;
+            this.btnAnexaImagem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAnexaImagem.Image = ((System.Drawing.Image)(resources.GetObject("btnAnexaImagem.Image")));
+            this.btnAnexaImagem.Location = new System.Drawing.Point(418, 477);
+            this.btnAnexaImagem.Name = "btnAnexaImagem";
+            this.btnAnexaImagem.Size = new System.Drawing.Size(41, 48);
+            this.btnAnexaImagem.TabIndex = 9;
+            this.btnAnexaImagem.UseVisualStyleBackColor = false;
+            this.btnAnexaImagem.Click += new System.EventHandler(this.btnAnexaImagem_Click);
+            // 
+            // txtLog
+            // 
+            this.txtLog.Location = new System.Drawing.Point(22, 90);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(506, 363);
+            this.txtLog.TabIndex = 10;
+            this.txtLog.Text = "";
+            // 
             // frmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(568, 548);
+            this.Controls.Add(this.txtLog);
+            this.Controls.Add(this.btnAnexaImagem);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.txtMensagem);
-            this.Controls.Add(this.txtLog);
             this.Controls.Add(this.btnConectar);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.txtServidorIP);
@@ -143,6 +155,7 @@ namespace ChatCliente
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCliente";
             this.Text = "Usuario";
+            this.Load += new System.EventHandler(this.frmCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,10 +168,11 @@ namespace ChatCliente
         private System.Windows.Forms.TextBox txtServidorIP;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Button btnConectar;
-        private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.TextBox txtMensagem;
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAnexaImagem;
+        private System.Windows.Forms.RichTextBox txtLog;
     }
 }
 
