@@ -43,3 +43,4 @@ C:\Users\cebol\Desktop\ChatAPS\ChatCliente\obj\Debug\net5.0-windows\ChatCliente.
 C:\Users\cebol\Desktop\ChatAPS\ChatCliente\obj\Debug\net5.0-windows\ref\ChatCliente.dll
 C:\Users\cebol\Desktop\ChatAPS\ChatCliente\obj\Debug\net5.0-windows\ChatCliente.pdb
 C:\Users\cebol\Desktop\ChatAPS\ChatCliente\obj\Debug\net5.0-windows\ChatCliente.genruntimeconfig.cache
+C:\Users\Yago\Desktop\ChatAPS\ChatCliente\obj\Debug\net5.0-windows\ChatCliente.Properties.Resources.resources

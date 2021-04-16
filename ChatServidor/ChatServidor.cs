@@ -142,7 +142,7 @@ namespace ChatServidor
             StreamWriter swSenderSender;
 
             // Primeiro exibe a mensagem na aplicação
-            e = new StatusChangedEventArgs(Origem + " disse : " + Mensagem);
+            e = new StatusChangedEventArgs("[" + DateTime.Now.ToShortTimeString() + "]"+ Origem +": " + Mensagem);
             OnStatusChanged(e);
 
             // Cria um array de clientes TCPs do tamanho do numero de clientes existentes
@@ -162,7 +162,7 @@ namespace ChatServidor
                     }
                     // Envia a mensagem para o usuário atual no laço
                     swSenderSender = new StreamWriter(tcpClientes[i].GetStream());
-                    swSenderSender.WriteLine(Origem + " disse: " + Mensagem);
+                    swSenderSender.WriteLine("[" + DateTime.Now.ToShortTimeString() + "]" + Origem + ": " + Mensagem);
                     swSenderSender.Flush();
                     swSenderSender = null;
                 }

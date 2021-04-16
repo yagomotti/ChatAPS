@@ -45,7 +45,7 @@ namespace ChatCliente
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 26);
+            this.label1.Location = new System.Drawing.Point(22, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 15);
             this.label1.TabIndex = 0;
@@ -62,7 +62,7 @@ namespace ChatCliente
             // 
             // txtServidorIP
             // 
-            this.txtServidorIP.Location = new System.Drawing.Point(108, 23);
+            this.txtServidorIP.Location = new System.Drawing.Point(91, 23);
             this.txtServidorIP.Name = "txtServidorIP";
             this.txtServidorIP.Size = new System.Drawing.Size(126, 23);
             this.txtServidorIP.TabIndex = 2;
@@ -86,10 +86,10 @@ namespace ChatCliente
             // 
             // txtMensagem
             // 
-            this.txtMensagem.Location = new System.Drawing.Point(34, 477);
+            this.txtMensagem.Location = new System.Drawing.Point(22, 477);
             this.txtMensagem.Multiline = true;
             this.txtMensagem.Name = "txtMensagem";
-            this.txtMensagem.Size = new System.Drawing.Size(301, 48);
+            this.txtMensagem.Size = new System.Drawing.Size(390, 48);
             this.txtMensagem.TabIndex = 6;
             this.txtMensagem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMensagem_KeyPress);
             // 
@@ -131,7 +131,7 @@ namespace ChatCliente
             // 
             this.txtLog.Location = new System.Drawing.Point(22, 90);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(506, 363);
+            this.txtLog.Size = new System.Drawing.Size(518, 363);
             this.txtLog.TabIndex = 10;
             this.txtLog.Text = "";
             // 

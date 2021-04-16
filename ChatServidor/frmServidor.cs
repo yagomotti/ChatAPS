@@ -45,20 +45,26 @@ namespace ChatServidor
 
         private void btnAtender_Click(object sender, EventArgs e)
         {
-            // Analisa o endereço IP do servidor informado no textbox
-            IPAddress enderecoIP = IPAddress.Parse(txtIP.Text);
+            try
+            {
+                // Analisa o endereço IP do servidor informado no textbox
+                IPAddress enderecoIP = IPAddress.Parse(txtIP.Text);
 
-            // Cria uma nova instância do objeto ChatServidor
-            ChatServidor mainServidor = new ChatServidor(enderecoIP);
+                // Cria uma nova instância do objeto ChatServidor
+                ChatServidor mainServidor = new ChatServidor(enderecoIP);
 
-            // Vincula o tratamento de evento StatusChanged a mainServer_StatusChanged
-            ChatServidor.StatusChanged += new StatusChangedEventHandler(mainServidor_StatusChanged);
+                // Vincula o tratamento de evento StatusChanged a mainServer_StatusChanged
+                ChatServidor.StatusChanged += new StatusChangedEventHandler(mainServidor_StatusChanged);
 
-            // Inicia o atendimento das conexões
-            mainServidor.IniciaAtendimento();
+                // Inicia o atendimento das conexões
+                mainServidor.IniciaAtendimento();
 
-            // Mostra que nos iniciamos o atendimento para conexões
-            txtLog.AppendText("Monitorando as conexões...\r\n");
+                // Mostra que nos iniciamos o atendimento para conexões
+                txtLog.AppendText("Monitorando as conexões...\r\n");
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Erro ao iniciar o atendimento!\n" + ex.Message);
+            }
         }
     }
 }

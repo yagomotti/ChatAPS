@@ -116,13 +116,20 @@ namespace ChatCliente
 
         private void EnviaMensagem()
         {
-            if (txtMensagem.Lines.Length >= 1)
-            {   //escreve a mensagem da caixa de texto
-                stwEnviador.WriteLine(txtMensagem.Text);
-                stwEnviador.Flush();
-                txtMensagem.Lines = null;
+            try
+            {
+                if (txtMensagem.Lines.Length >= 1)
+                {   //escreve a mensagem da caixa de texto
+                    stwEnviador.WriteLine(txtMensagem.Text);
+                    stwEnviador.Flush();
+                    txtMensagem.Lines = null;
+                }
+                txtMensagem.Text = "";
             }
-            txtMensagem.Text = "";
+            catch(Exception ex)
+            {
+                MessageBox.Show("Erro ao enviar mensagem! \n"+ ex.Message);
+            }
         }
         private void EnviaImagem(string filePath)
         {
@@ -171,13 +178,19 @@ namespace ChatCliente
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            if (Conectado == false)
+            try
             {
-                InicializaConexao();
-            }
-            else // Se esta conectado entao desconecta
+                if (Conectado == false)
+                {
+                    InicializaConexao();
+                }
+                else // Se esta conectado entao desconecta
+                {
+                    FechaConexao("Desconectado!");
+                }
+            }catch(Exception ex)
             {
-                FechaConexao("Desconectado!");
+                MessageBox.Show("Erro ao conectar/desconectar do servidor!\n" + ex.Message);
             }
         }
 
