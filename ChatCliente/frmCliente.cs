@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
@@ -135,11 +129,24 @@ namespace ChatCliente
         {
             if (filePath.Length >= 1)
             {
-                Image imagem = Image.FromFile(filePath);
-                Bitmap bitmp = new Bitmap(imagem);
-                stwEnviador.WriteLine(bitmp);
-                stwEnviador.Flush();
-                txtMensagem.Lines = null;
+                try
+                {
+                    Image imagem = Image.FromFile(filePath);
+                    string path = Directory.GetCurrentDirectory();
+                    string imageReceivedPath = path.Substring(0, path.IndexOf("ChatCliente")) + "Receber\\teste.png";
+
+                    ImageConverter _imageConverter = new ImageConverter();
+                    byte[] imagemByte = (byte[])_imageConverter.ConvertTo(imagem, typeof(byte[]));
+
+                    File.WriteAllBytes(imageReceivedPath, imagemByte);
+                    stwEnviador.WriteLine("Imagem enviada, link para visualizar: " + imageReceivedPath);
+                    stwEnviador.Flush();
+                    txtMensagem.Lines = null;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Erro ao enviar Imagem! \n" + ex.Message);
+                }
             }
             txtMensagem.Text = "";
         }
