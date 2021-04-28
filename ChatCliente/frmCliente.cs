@@ -5,6 +5,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using static System.Windows.Forms.LinkLabel;
+using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ChatCliente
 {
@@ -15,6 +18,7 @@ namespace ChatCliente
             // Na saida da aplicação : desconectar
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
             InitializeComponent();
+            this.txtLog.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtLog_LinkClicked);
 
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
@@ -28,6 +32,8 @@ namespace ChatCliente
 
 
         // Trata o nome do usuário
+        public event System.Windows.Forms.LinkClickedEventHandler LinkClicked;
+       // public System.Diagnostics.Process p = new System.Diagnostics.Process();
         private string NomeUsuario = "Desconhecido";
         private StreamWriter stwEnviador;
         private StreamReader strReceptor;
@@ -108,6 +114,11 @@ namespace ChatCliente
             txtLog.AppendText(strMensagem + "\r\n");
         }
 
+        private void txtLog_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("IEXPLORE.EXE", e.LinkText);
+        }
+
         private void EnviaMensagem()
         {
             try
@@ -120,11 +131,14 @@ namespace ChatCliente
                 }
                 txtMensagem.Text = "";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Erro ao enviar mensagem! \n"+ ex.Message);
+                MessageBox.Show("Erro ao enviar mensagem! \n" + ex.Message);
             }
         }
+
+
+
         private void EnviaImagem(string filePath)
         {
             if (filePath.Length >= 1)
@@ -133,17 +147,19 @@ namespace ChatCliente
                 {
                     Image imagem = Image.FromFile(filePath);
                     string path = Directory.GetCurrentDirectory();
-                    string imageReceivedPath = path.Substring(0, path.IndexOf("ChatCliente")) + "Receber\\teste.png";
+                    string name = filePath.Substring(filePath.LastIndexOf("\\"));
+                    string imageReceivedPath = path.Substring(0, path.IndexOf("ChatCliente")) + "Receber" + name;
 
                     ImageConverter _imageConverter = new ImageConverter();
                     byte[] imagemByte = (byte[])_imageConverter.ConvertTo(imagem, typeof(byte[]));
 
                     File.WriteAllBytes(imageReceivedPath, imagemByte);
-                    stwEnviador.WriteLine("Imagem enviada, link para visualizar: " + imageReceivedPath);
+                    Uri uri = new Uri(imageReceivedPath);
+                    stwEnviador.WriteLine("Imagem enviada, link para visualizar: " + uri);
                     stwEnviador.Flush();
                     txtMensagem.Lines = null;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao enviar Imagem! \n" + ex.Message);
                 }
@@ -195,7 +211,8 @@ namespace ChatCliente
                 {
                     FechaConexao("Desconectado!");
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao conectar/desconectar do servidor!\n" + ex.Message);
             }

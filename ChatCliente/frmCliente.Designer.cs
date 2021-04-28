@@ -131,6 +131,7 @@ namespace ChatCliente
             // 
             this.txtLog.Location = new System.Drawing.Point(22, 90);
             this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
             this.txtLog.Size = new System.Drawing.Size(518, 363);
             this.txtLog.TabIndex = 10;
             this.txtLog.Text = "";
