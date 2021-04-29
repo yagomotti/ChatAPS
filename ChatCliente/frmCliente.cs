@@ -8,6 +8,7 @@ using System.Threading;
 using static System.Windows.Forms.LinkLabel;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text;
 
 namespace ChatCliente
 {
@@ -33,7 +34,7 @@ namespace ChatCliente
 
         // Trata o nome do usuário
         public event System.Windows.Forms.LinkClickedEventHandler LinkClicked;
-       // public System.Diagnostics.Process p = new System.Diagnostics.Process();
+        // public System.Diagnostics.Process p = new System.Diagnostics.Process();
         private string NomeUsuario = "Desconhecido";
         private StreamWriter stwEnviador;
         private StreamReader strReceptor;
@@ -116,8 +117,15 @@ namespace ChatCliente
 
         private void txtLog_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("IEXPLORE.EXE", e.LinkText);
+            var ps = new ProcessStartInfo(e.LinkText)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
+
+
 
         private void EnviaMensagem()
         {
@@ -141,21 +149,19 @@ namespace ChatCliente
 
         private void EnviaImagem(string filePath)
         {
+            string name = filePath.Substring(filePath.LastIndexOf("\\"));
+            string path = Directory.GetCurrentDirectory();
+            string imageReceivedPath = path.Substring(0, path.IndexOf("ChatCliente")) + "Receber" + name;
+
             if (filePath.Length >= 1)
             {
                 try
                 {
-                    Image imagem = Image.FromFile(filePath);
-                    string path = Directory.GetCurrentDirectory();
-                    string name = filePath.Substring(filePath.LastIndexOf("\\"));
-                    string imageReceivedPath = path.Substring(0, path.IndexOf("ChatCliente")) + "Receber" + name;
+                    byte[] arquivo = File.ReadAllBytes(filePath);
 
-                    ImageConverter _imageConverter = new ImageConverter();
-                    byte[] imagemByte = (byte[])_imageConverter.ConvertTo(imagem, typeof(byte[]));
-
-                    File.WriteAllBytes(imageReceivedPath, imagemByte);
+                    File.WriteAllBytes(imageReceivedPath, arquivo);
                     Uri uri = new Uri(imageReceivedPath);
-                    stwEnviador.WriteLine("Imagem enviada, link para visualizar: " + uri);
+                    stwEnviador.WriteLine("Arquivo enviado, link para visualizar: " + uri);
                     stwEnviador.Flush();
                     txtMensagem.Lines = null;
                 }
